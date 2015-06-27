@@ -1,0 +1,79 @@
+<div>
+  <section>
+    <div class="page-message" ng-hide="contacts.length">
+      <span>{{message}}</span>
+    </div>
+    <div ng-show="contacts.length">
+      <div class="contacts-table-filter">
+        <input type="text" placeholder="search first or last name" ng-model="searchParam" />
+        <select ng-model="stateParam" ng-options="item.state for item in contacts | uniqueByProp:'state' | orderBy: 'state'">
+          <option value=''>All</option>
+        </select>
+        <button ng-click="resetFilter()" ng-disabled="!stateParam && !searchParam"><span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"/></span></button>
+        <button style="float:right" ng-click="logout()">logout</button>
+      </div>
+      <div class="table-wrap">
+        <table class="contacts-table">
+            <thead>
+              <tr>
+                <th>Date Joined</th>
+                <th class="mobile">First Name</th>
+                <th class="mobile">Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th class="mobile">State</th>
+                <th>Zip</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-click="showDetails(contact)" ng-repeat="contact in filteredResults  = (contacts | filter: searchFilter)  | limitFrom:page*pageSize | limitTo:pageSize">
+                  <td>{{contact.join_date}}</td>
+                  <td class="mobile">{{contact.first_name}}</td>
+                  <td class="mobile">{{contact.last_name}}</td>
+                  <td>{{contact.email}}</td>
+                  <td>{{contact.phone}}</td>
+                  <td>{{contact.address}}</td>
+                  <td>{{contact.city}}</td>
+                  <td class="mobile">{{contact.state}}</td>
+                  <td>{{contact.zip}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                  <td class="mobile" colspan="9">
+                    <div class="paging-control" ng-hide="pages() == 0">
+                      <button class="button" ng-disabled="page === 0" ng-click="page = page - 1"><span>Prev</span></button>
+                      <span>{{page + 1}}/{{pages()}}</span>
+                      <button  class="button" ng-disabled="page === pages() - 1" ng-click="page = page + 1"><span>Next</span></button>
+                      <select ng-model="pageSize" convert-to-number ng-options="v as v for v in pageSizes"></select>
+                    </div>
+                    <span class="table-count">Results: {{filteredResults.length}}</span>
+                  </td>
+                </tr>
+            </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section ng-show="selectedContact != false" class="detail-pane">
+      <div class="details">
+        <header>
+          <h1>Contact Details</h1>
+        </header>
+        <span><label>Name: </label>{{selectedContact.first_name}} {{selectedContact.last_name}}</span>
+        <span class="address">
+          <label>Address:</label>
+          <span class="line1">{{selectedContact.address}}</span>
+          <span class="line2">{{selectedContact.city}}, {{selectedContact.state}} {{selectedContact.zip}}</span>
+        </span>
+        <span><label>Phone: </label><a ng-href="tel:{{selectedContact.phone}}">{{selectedContact.phone}}</a></span>
+        <span><label>Email: </label><a ng-href=" mailto:{{selectedContact.email}}">{{selectedContact.email}}</a></span>
+        <span><label>Joined: </label>{{selectedContact.join_date}}</span>
+        <footer>
+          <button ng-click="selectedContact = false"><span>close</span></button>
+        </footer>
+      </div>
+  </section>
+</div>

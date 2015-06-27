@@ -1,0 +1,27 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+h2 { font-weight: 400; }
+h3 { font-weight: bold; }
+.container { max-width: 970px; }
+.navbar-default {
+  background-color: #202020;
+  border-color: #565656;
+  border-style: dashed;
+}
+.jumbotron-inverse {
+  background: rgba(0, 0, 0, 0.87);
+  color: #fff;
+}
+
+.flythruimg {
+     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALsAAABDCAMAAADzj4QsAAACl1BMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9jrjphAAAA3HRSTlMAAQIDBAUGBwgJCgsNDg8QERITFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEzNDU2Nzg5Ojs8PT5AQUJDREVGSElKS01OT1FTVFVXWFlbXF1eX2BiY2RlZmdoaWprbG1ub3BxcnN0dnd4eXp7fH5/g4SGh4iLjI2Oj5CRk5SVlpeZm5yen6Cho6Slpqeoqaqsrq+xs7S1tre4ubq7vb6/wMLDxMXGycvMzc7P0NHS09TV1tjZ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);
+ }
+ .flythrulogo {
+      margin: 1px 0 0 5px; 
+      display: block; position: absolute; height: 50px; width: 100px;
+      background-position: center center;
+      background-size: 100%; background-repeat: no-repeat;        	
+  }
