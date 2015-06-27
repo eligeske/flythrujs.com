@@ -1,0 +1,24 @@
+[
+    {
+        "address": "P.O. Box 1947, 7 Tater St.",
+        "city": "Boise",
+        "email": "ted@D12312KKdjske.com",
+        "first_name": "Ted",
+        "join_date": "06/20/2015",
+        "last_name": "Schmity",
+        "phone": "1-333-440-1223",
+        "state": "ID",
+        "zip": "45125"
+    },
+    {
+        "address": "33 Hashbrown Cir.",
+        "city": "Cascade",
+        "email": "fred@D12312KKdjske.com",
+        "first_name": "Fred",
+        "join_date": "06/20/2015",
+        "last_name": "Schmity",
+        "phone": "1-333-440-1223",
+        "state": "ID",
+        "zip": "83611"
+    }
+]

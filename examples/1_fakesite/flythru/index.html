@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>flythrujs</title>
+    <link href="assets/flythru.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <div id="left_cont">
+            <div id="title_bar">
+                <span class="flythrulogo flythruimg"></span>
+                <button id="run_test" disabled>Take Off</button>
+            </div>
+            <div id="test_panel"></div>
+        </div>
+        <div id="right_cont">
+            <div id="browser_window"  class="flythruimg">
+                <iframe id="speciman" src="" class="faded"></iframe>
+                <div id="browser_cover"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="assets/flythru.js"></script>
+    <script>
+        flythru.config({
+           viewport:{
+               w: 320, h: 568
+           }
+        });
+        flythru.destination("http://localhost/github/flythrujs.com/examples/1_fakesite/");
+        
+        // login
+        flythru.addFlight("Login")
+        .addStop("Enter Credentials - admin/pass123", function(pass,fail,cargo){
+           if(cargo.html.find('[name="username"]').typeIn("admin").length > 0 
+               && cargo.html.find('[name="password"]').typeIn("pass123").length > 0){
+               pass();
+           }else{
+               fail('Unable to fill in credentials');
+           }
+        })
+        .addStop("Click login",function(pass,fail,cargo){
+            var found = cargo.html.find('button:contains("Login")') 
+            if(found.length) { found.click(); pass(); }
+            else { fail("No login button found"); }            
+        }).
+        layover("Records ready?",function(pass,fail,cargo){
+            var found = cargo.html.find('.contacts-table');
+            if(found.length && found.is(":visible")){
+                pass();
+            }
+        });
+        
+        // edit
+        flythru.addFlight("Find and Edit Ted")
+        .addStop("Search for Ted",function(pass,fail,cargo){
+            cargo.passenger = {
+                fname: "Ted", lname: "Schmity"
+            }
+            var found = cargo.html.find("[ng-model='searchParam']");
+            if(found.length){
+                found.typeIn(cargo.passenger.fname); pass();
+            }else{
+                fail("Could not find search box!");
+            }
+        })
+        .layover("Is Ted there?",function(pass,fail,cargo){            
+            var found = cargo.html.find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
+            if(found.length){
+                cargo.ele = found; pass();
+            }
+        },5000)
+        .addStop("Click the Ted row", function(pass,fail,cargo){
+            cargo.ele.click(); pass();
+        })
+        .layover("Wait for Ted's details", function(pass,fail,cargo){
+            var foundLabel = cargo.html.find('.detail-pane label:contains("Name:")');
+            if(foundLabel.length){
+                var match = foundLabel.parent().text().indexOf(cargo.passenger.fname+" "+cargo.passenger.lname) > 0;
+               if(match) pass();
+            }
+        },5000)
+        .layover(5000) // <-- wait so you can read the details, for effect only 
+        .addStop("Close the details", function(pass,fail,cargo){
+            var found = cargo.html.find('.detail-pane footer button');
+            if(found.length){
+                found.click(); 
+                (!found.is(":visible"))?pass():fail('Details did not close!');
+            }
+        });
+        
+        // logout
+        flythru.addFlight("Logout")
+        .layover(5000)
+        .addStop("Click the logout button",function(pass,fail,cargo){
+            var found = cargo.html.find("[ng-click='logout()']");
+            if(found.length){
+                found.click(); pass();
+            }else{
+                fail("No logout button found!");
+            }
+        })
+        .layover("Are we at login screen?",function(pass,fail,cargo){
+                        
+        });
+        
+        
+    </script>
+    
+</body>
+</html>

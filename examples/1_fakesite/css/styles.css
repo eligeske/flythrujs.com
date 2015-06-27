@@ -1,0 +1,169 @@
+body {
+  font-family: Arial;
+  font-size: 12px;
+  line-height: 150%;
+}
+
+/* tables */
+table {
+  border-collapse: collapse; width: 100%;
+}
+table th { padding: 10px 5px; text-align: left; border-bottom: 3px solid #797979; }
+table td { padding: 5px; border-bottom: 1px solid #ccc; }
+
+
+.center-box {
+  width: 300px; margin: 0 auto
+}
+.border {
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+/* forms */
+form > div {
+  line-height: 45px;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  width: 85px;
+}
+
+button, input, select {
+  padding: 5px 10px; font-size: 12px;
+  border: 1px solid #ccc; outline: none; 
+}
+input, select{
+  background-color: #fff !important;  
+}
+
+input {
+  width: 170px; 
+}
+button, table tfoot .table-count {
+  margin: 12px;
+}
+button {
+  position: relative; display: inline-block;
+  font-weight: bold; text-transform: uppercase;
+  color: rgb(255,255,255); background: rgba(0, 119, 255, 1);
+  transition: background 0.3s ease; cursor: pointer;
+  border: 1px solid transparent; border-radius: 5px; outline: none;
+  overflow: hidden;
+}
+button img {
+  height: 9px;
+}
+button:hover {
+  background: rgba(0, 119, 255, 0.75);
+}
+button::before {
+  content: ""; background: black;
+  display: block; position: absolute; z-index: -1;
+  width: 100%; height: 100%;
+  padding: 15px; margin: -15px;
+}
+button:active:not(:disabled) span {
+  opacity: 0.6;
+}
+button:disabled {
+  background: rgba(146, 197, 255, 1);
+  cursor: not-allowed;
+}
+
+/* contacts table */
+.contacts-table tbody tr { transition: all 0.3s ease; }
+.contacts-table tbody tr:hover {
+  background: rgb(0, 100, 215); color: #fff; cursor: pointer;
+}
+.contacts-table tfoot .table-count {
+  float: right; display: inline-block;
+  line-height: 24px; margin: 12px;
+}
+.contacts-table tfoot .paging-control { display: inline-block }
+
+/* detail pane */
+.detail-pane {
+  position: fixed; background: rgba(29, 37, 45, 0.8);
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+.detail-pane .details {
+  background: #fff; height: 310px; width: 300px;
+  margin:130px auto; position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+.detail-pane .details header {
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+.detail-pane .details header h1 {
+  padding: 0 15px;
+}
+.detail-pane .details footer {
+  position: absolute; bottom: 0; width: 100%; text-align: right;
+  border-top: 1px solid rgb(204, 204, 204);
+}
+.detail-pane .details label {
+  float: left; width: 50px;
+}
+.detail-pane .details > span {
+  margin: 15px 15px 0; display: block;
+}
+.detail-pane .details > span > span,
+.detail-pane .details > span > a {
+  display: block; word-break: break-all;
+  margin-left: 50px;
+}
+.detail-pane .details .name {
+  display: block;
+}
+
+@media (min-width: 601px) {
+  body > header {
+    border-bottom: 1px solid  rgb(0,0,0);
+  }
+  .container{ max-width: 900px; margin-left: auto; margin-right:auto; }
+}
+@media (max-width: 600px) {
+  body {
+     margin: 0 0 70px 0;
+  }
+  body > header {
+    position: fixed; width: 100%;
+    height: 45px; line-height: 41px;
+    background: rgb(0,0,0); color: rgb(255,255,255);
+  }
+  body > header h1 {
+    padding: 0 15px; margin:0;
+  }
+  .page-message {
+    padding-top: 85px; text-align: center;
+  }
+  .center-box input { width: 90% }
+  .center-box { border: none; }
+  .center-box label { line-height: 1; display: block; }
+  .contacts-table-filter {
+    position: fixed; width: 100%; top: 40px; padding: 0 0 0 5px;
+    background: rgb(209, 229, 250);
+  }
+  .detail-pane .details {
+    margin: auto;
+  }
+  .table-wrap {
+    padding: 95px 10px 0;
+  }
+  .contacts-table th:not(.mobile), .contacts-table td:not(.mobile) {
+    display: none;
+  }
+  .contacts-table tfoot td {
+    position: fixed; bottom: 0; width: 100%; margin-left: -15px;
+    box-shadow: 0px -1px 5px rgb(200, 200, 200);
+    border: none; background: rgb(255,255,255);
+  }
+  .contacts-table tfoot .paging-control {
+    display: block; width: 100%; text-align: center;
+  }
+  .contacts-table tfoot .table-count {
+    display: none;
+  }
+}
