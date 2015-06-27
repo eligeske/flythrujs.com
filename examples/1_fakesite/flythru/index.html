@@ -29,7 +29,7 @@
                w: 320, h: 568
            }
         });
-        flythru.destination("http://localhost/github/flythrujs.com/examples/1_fakesite/");
+        flythru.destination("../index.html");
         
         // login
         flythru.addFlight("Login")
@@ -82,7 +82,7 @@
                if(match) pass();
             }
         },5000)
-        .layover(5000) // <-- wait so you can read the details, for effect only 
+        .layover(2000) // <-- wait so you can read the details, for effect only 
         .addStop("Close the details", function(pass,fail,cargo){
             var found = cargo.html.find('.detail-pane footer button');
             if(found.length){
@@ -93,7 +93,7 @@
         
         // logout
         flythru.addFlight("Logout")
-        .layover(5000)
+        .layover(1000)
         .addStop("Click the logout button",function(pass,fail,cargo){
             var found = cargo.html.find("[ng-click='logout()']");
             if(found.length){
@@ -103,8 +103,9 @@
             }
         })
         .layover("Are we at login screen?",function(pass,fail,cargo){
-                        
-        });
+            var found = cargo.html.find('[name="username"]'); 
+            if(found.length && found.is(":visible")) pass();
+        },4000);
         
         
     </script>

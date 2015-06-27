@@ -25,3 +25,31 @@ h3 { font-weight: bold; }
       background-position: center center;
       background-size: 100%; background-repeat: no-repeat;        	
   }
+  
+  .nav-tabs { border-bottom: 5px solid #2A2A2A; }
+  
+  .nav-tabs>li>a {
+    color: #2A2A2A;
+  }
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  color: #FFFFFF;
+  background-color: #2A2A2A;
+  border: 1px solid #2A2A2A;
+  border-bottom-color: transparent;
+  cursor: default;
+  }
+  
+  .nav-tabs>li>a:hover {
+  border-color: #2A2A2A #2A2A2A #2A2A2A;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+  text-decoration: none;
+  color: #fff;
+  background-color: #000000;
+}
+
+@media (max-width: 766px){
+.navbar-collapse.pull-right { float: none !important;
+  text-align: center; }
+}

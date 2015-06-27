@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Functional Testing library for Single Page JavaScript Applications">
     <meta name="author" content="var nerd">
     <link href="favicon.ico" rel="shortcut icon" />
@@ -11,6 +11,9 @@
     <title>flythru.js - functional testing kit</title>
 
     <link href="assets/google-code-prettify/prettify.css" rel="stylesheet">
+    <style>
+
+    </style>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link href="css/site.css" rel="stylesheet">
@@ -21,15 +24,21 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>-->
+          </button>
           <a class="navbar-brand flythruimg flythrulogo" href="#"><span style="display:none">flythru.js</span></a>
         </div>
-        
+        <div id="navbar" class="collapse navbar-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#getting_started">Getting Started</a></li>
+            <li><a href="#api">API</a></li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -43,27 +52,27 @@
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
+
       <div class="row">
         <div class="col-md-4">
           <h2>UI Smart</h2>
-          <p>Easily write pass/fail tests based on the DOM elements in your single page application. Mimic your users interactions in each test step using your favorite javascript libraries and watch them play out live when they run.</p>          
+          <p>Easily write pass/fail tests based on the DOM elements in your single page application. Mimic your users interactions in each test step using your favorite javascript libraries and watch them play out live when they run.</p>
         </div>
         <div class="col-md-4">
           <h2>Drop-In-Ready</h2>
           <p>FlyThru JS is a drop in directory containing all the necessary files to start writing tests and witnessing results immediatley.</p>
        </div>
-        <div class="col-md-4">
+        <div class="col-md-4" >
           <h2>Simple Syntax</h2>
           <p>Functional testing should not be difficult. Create a test, add steps, wait for elements to appear and simply pass or fail them. Easy as that!</p>
         </div>
       </div>
 
 		<hr>
-	
+
 	  <div class="row">
 		  <div class="col-sm-6">
-			  <h3>Getting Started</h3>
+			  <h3 id="getting_started">Getting Started</h3>
         <p>
         <ol>
           <li>Download flythru.js kit</li>
@@ -83,46 +92,175 @@
               flythure.min.js</pre>
       </div>
 	  </div>
-    <div class="row">
+    <hr>
+    <div class="row hidden-xs">
+       <div class="col-sm-12" style="padding-bottom: 15px;">
+          <h3 id="demo">Watch it fly!</h3>
+          <p>Below is an example of a basic single page AngularJS application.</p>
+       </div>
+    </div>
+    <div class="row hidden-xs">
       <div class="col-sm-12">
-        <h3>How to use</h3>
-        <p>Examples below use jQuery</p>
-        <pre class="prettyprint" style="white-space: none; overflow-x: auto"><code>
-        flythru.navigate("http://localhost/"); // <-- must be same domain
-        flythru.addTest("My Test Name")
-        .addStep("check something here", function(pass,fail,dom,cache){
-            var found = dom.find("input");
-            if(found){
-              cache.ele = found; pass();
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-inverse" role="tablist">
+          <li role="presentation" class="active"><a href="#demo_output" aria-controls="demo_output" role="tab" data-toggle="tab">Demo</a></li>
+          <li role="presentation"><a href="#demo_js" aria-controls="demo_js" role="tab" data-toggle="tab">Full Test Script</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- tab 1 -->
+          <div role="tabpanel" class="tab-pane active" id="demo_output">
+            <div class="row">
+              <div class="col-sm-12">
+                <h4 style="padding: 10px;">Press the "Take Off" button</h4>
+                <iframe src="examples/1_fakesite/flythru/" style="border: 4px solid #fff; width: 100%; height: 600px;"></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- tab 2 -->
+          <div role="tabpanel" class="tab-pane" id="demo_js">
+            <div class="row">
+              <div class="col-sm-12">
+                <h4 style="padding: 10px;">Full example</h4>
+                <div style="max-height: 600px;  overflow-x: auto">
+                  <pre class="prettyprint" style="white-space: none;"><code>
+        // configuration (set viewport size, pace)
+        // optional
+        flythru.config({
+           viewport:{
+               w: 320, h: 568
+           }
+        });
+        // set your website page
+        // mandatory prior to adding tests!
+        flythru.destination("../index.html");
+        
+        // First test aka Flight! 
+        // each Flight has stops and layovers
+        // inside stops and layovers are pass, fail and cargo
+        // 'pass' is a function to call to continue to next stop
+        // 'fail' throws error and grounds flight
+        // 'cargo' is a cached object that shares data between stops,flights, layovers
+        //    and gives you access to your websites window object and the page HTML 
+        //    wrapped in jQuery. You can use 'cargo' to pass data between 
+        //    flights, stops or layovers :)
+        flythru.addFlight("Login")
+        .addStop("Enter Credentials - admin/pass123", function(pass,fail,cargo){
+           if(cargo.html.find('[name="username"]').typeIn("admin").length > 0 
+               && cargo.html.find('[name="password"]').typeIn("pass123").length > 0){
+               pass();
+           }else{
+               fail('Unable to fill in credentials');
+           }
+        })
+        .addStop("Click login",function(pass,fail,cargo){
+            var found = cargo.html.find('button:contains("Login")') 
+            if(found.length) { found.click(); pass(); }
+            else { fail("No login button found"); }            
+        }).
+        layover("Records ready?",function(pass,fail,cargo){
+            var found = cargo.html.find('.contacts-table');
+            if(found.length && found.is(":visible")){
+                pass();
+            }
+        });
+        
+        // edit
+        flythru.addFlight("Find and Edit Ted")
+        .addStop("Search for Ted",function(pass,fail,cargo){
+            cargo.passenger = {
+                fname: "Ted", lname: "Schmity"
+            }
+            var found = cargo.html.find("[ng-model='searchParam']");
+            if(found.length){
+                found.typeIn(cargo.passenger.fname); pass();
             }else{
-              fail();
+                fail("Could not find search box!");
             }
         })
-        .wait(3000) //<--- wait for 3 secs before going to next step
-        .addStep("submit a value", function(pass,fail,dom,cache){
-          var found = dom.find('button');
-          (cache.ele.val('123') && found.click())?pass():fail();
+        .layover("Is Ted there?",function(pass,fail,cargo){            
+            var found = cargo.html.find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
+            if(found.length){
+                cargo.ele = found; pass();
+            }
+        },5000)
+        .addStop("Click the Ted row", function(pass,fail,cargo){
+            cargo.ele.click(); pass();
         })
-        .waitFor("Wait for Success Message",function(pass,fail,dom,cache){
-          var matches = dom.find("form .message");
-          if(matches){
-            return (dom.find("form .message:contains('Success!')"));
-          }
-        },20000);   //<--- waitFor will fail if true is not returned in 20 secs
-        </code></pre>
+        .layover("Wait for Ted's details", function(pass,fail,cargo){
+            var foundLabel = cargo.html.find('.detail-pane label:contains("Name:")');
+            if(foundLabel.length){
+                var match = foundLabel.parent().text().indexOf(cargo.passenger.fname+" "+cargo.passenger.lname) > 0;
+               if(match) pass();
+            }
+        },5000)
+        .layover(2000) // <-- wait so you can read the details, for effect only 
+        .addStop("Close the details", function(pass,fail,cargo){
+            var found = cargo.html.find('.detail-pane footer button');
+            if(found.length){
+                found.click(); 
+                (!found.is(":visible"))?pass():fail('Details did not close!');
+            }
+        });
+        
+        // logout
+        flythru.addFlight("Logout")
+        .layover(1000)
+        .addStop("Click the logout button",function(pass,fail,cargo){
+            var found = cargo.html.find("[ng-click='logout()']");
+            if(found.length){
+                found.click(); pass();
+            }else{
+                fail("No logout button found!");
+            }
+        })
+        .layover("Are we at login screen?",function(pass,fail,cargo){
+            var found = cargo.html.find('[name="username"]'); 
+            if(found.length && found.is(":visible")) pass();
+        },4000);</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-     </div>
+    </div>
 
-      <hr>
+    <hr>
+    
+    <div class="row hidden-xs">
+       <div class="col-sm-12" style="padding-bottom: 15px;">
+          <h3 id="api">API</h3>
+          <p>Here you will find the references for the latest version of flythru.js.</p>
+       </div>
+    </div>
 
-      <footer>
-        <p>&copy; Var Nerd, LLC</p>
-      </footer>
-    </div> <!-- /container -->
+
+    <hr>
+
+    <footer>
+      <p>&copy; Var Nerd, LLC</p>
+    </footer>
+  </div> <!-- /container -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="assets/google-code-prettify/prettify.js"></script>
-    <script>prettyPrint()</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>prettyPrint();</script>
+    <script>
+      $(function() {
+        $('a').click(function() {
+          var href = $(this).attr("href");
+          $('html, body').animate({
+            scrollTop: $(href).offset().top - 65
+          }, 500);
+          return false;
+        });
+      });
+      
+    </script>
   </body>
 </html>
