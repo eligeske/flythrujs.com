@@ -9,8 +9,7 @@
         <select ng-model="stateParam" ng-options="item.state for item in contacts | uniqueByProp:'state' | orderBy: 'state'">
           <option value=''>All</option>
         </select>
-        <button ng-click="resetFilter()" ng-disabled="!stateParam && !searchParam"><span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"/></span></button>
-        <button style="float:right" ng-click="logout()">logout</button>
+        <button ng-click="logout()" ><span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"/></span></button>
       </div>
       <div class="table-wrap">
         <table class="contacts-table">

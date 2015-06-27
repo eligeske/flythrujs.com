@@ -58,7 +58,9 @@ var flythru = (function(){
                     nextTest(i);
                 });
                 tests[i].takeoff();    
-            }                
+            }else{
+                startBtn.text("Landed!");
+            }               
         };
         nextTest();        
     }

@@ -30,13 +30,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand flythruimg flythrulogo" href="#"><span style="display:none">flythru.js</span></a>
+          <a class="navbar-brand flythruimg flythrulogo" href="./"><span style="display:none">flythru.js</span></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#getting_started">Getting Started</a></li>
-            <li><a href="#api">API</a></li>
+            <li><a href="#demo" class="scroll-to">Demo</a></li>
+            <li><a href="#getting_started"  class="scroll-to">Getting Started</a></li>
+            <li><a href="#api"  class="scroll-to">API</a></li>
           </ul>
         </div>
       </div>
@@ -88,15 +88,19 @@
           /flythru
             index.html
             /assets
-              flythru.css
-              flythure.min.js</pre>
+              flythru.min.css
+              flythru.min.js</pre>
       </div>
 	  </div>
     <hr>
-    <div class="row hidden-xs">
-       <div class="col-sm-12" style="padding-bottom: 15px;">
-          <h3 id="demo">Watch it fly!</h3>
+    <div id="demo" class="row">
+       <div  class="col-sm-12 hidden-xs" style="padding-bottom: 15px;">
+          <h3>Watch it fly!</h3>
           <p>Below is an example of a basic single page AngularJS application.</p>
+       </div>
+       <div  class="col-sm-12 visible-xs" style="padding-bottom: 15px;">
+          <h3>Watch it fly! :(</h3>
+          <p>Switch to a wider screen to see the demo in action!</p>
        </div>
     </div>
     <div class="row hidden-xs">
@@ -254,10 +258,13 @@
       $(function() {
         $('a').click(function() {
           var href = $(this).attr("href");
-          $('html, body').animate({
-            scrollTop: $(href).offset().top - 65
-          }, 500);
-          return false;
+          if(href && $(this).hasClass('scroll-to')){
+            $('html, body').animate({
+              scrollTop: $(href).offset().top - 65
+            }, 500);
+            //document.location.hash = href;
+            return false;  
+          }          
         });
       });
       
