@@ -47,12 +47,11 @@
       <div class="container" style="text-align: center;">
         <h1>flythru.js</h1>
         <p>Functional testing kit for single page javascript applications.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">GitHub</a> <a class="btn btn-primary btn-lg" href="#" role="button">Download</a></p>
+        <p><button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_github" role="button">GitHub</button> <a class="btn btn-primary btn-lg" href="#" role="button">Download</a></p>
       </div>
     </div>
-
+    <!-- container -->
     <div class="container">
-
       <div class="row">
         <div class="col-md-4">
           <h2>UI Smart</h2>
@@ -67,64 +66,63 @@
           <p>Functional testing should not be difficult. Create a test, add steps, wait for elements to appear and simply pass or fail them. Easy as that!</p>
         </div>
       </div>
+		  <hr>
+      <!-- getting started -->
+      <article class="row">
+      	<div class="col-sm-6">
+      		<h1 id="getting_started">Getting Started</h1>
+      		<ol>
+      			<li>Download flythru.js kit</li>
+      			<li>Drop the /flythru folder into your root directory</li>
+      			<li>Set your web address /flythru/index.html Call flythrough.navigate(&quot;http://yourwebsite.com&quot;)</li>
+      			<li>Browse to /flythru/index.html and the tester will load the page</li>
+      		</ol>
+      	</div>
+      	<div class="col-sm-6">
+      		<h2>Kit Directory Structure</h2>
+      		<pre>
+    /flythru
+      index.html
+      /assets
+        flythru.min.css
+        flythru.min.js</pre>
+      	</div>
+      </article>
+      <!-- /getting started -->
+      <hr>
+      <!-- demo -->
+      <article id="demo" class="row">
+         <div  class="col-sm-12" style="padding-bottom: 15px;">
+            <h1>Watch it fly!</h1>
+            <p class="hidden-xs">Below is an example of a basic single page AngularJS application.</p>
+            <p class="visible-xs">Switch to a wider screen to see the demo in action!</p>
 
-		<hr>
-
-	  <article class="row">
-		  <div class="col-sm-6">
-			  <h1 id="getting_started">Getting Started</h1>
-        <p>
-        <ol>
-          <li>Download flythru.js kit</li>
-          <li>Drop the /flythru folder into your root directory</li>
-          <li>Set your web address /flythru/index.html Call flythrough.navigate(&quot;http://yourwebsite.com&quot;)</li>
-          <li>Browse to /flythru/index.html and the tester will load the page</li>
-        </ol>
-        </p>
-		  </div>
-      <div class="col-sm-6">
-        <h2>Kit Directory Structure</h2>
-        <pre>
-          /flythru
-            index.html
-            /assets
-              flythru.min.css
-              flythru.min.js</pre>
-      </div>
-	  </article>
-    <hr>
-    <article id="demo" class="row">
-       <div  class="col-sm-12" style="padding-bottom: 15px;">
-          <h1>Watch it fly!</h1>
-          <p class="hidden-xs">Below is an example of a basic single page AngularJS application.</p>
-          <p class="visible-xs">Switch to a wider screen to see the demo in action!</p>
-     
-    <div class="row hidden-xs">
-      <div class="col-sm-12">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-inverse" role="tablist">
-          <li role="presentation" class="active"><a href="#demo_output" aria-controls="demo_output" role="tab" data-toggle="tab">Demo</a></li>
-          <li role="presentation"><a href="#demo_js" aria-controls="demo_js" role="tab" data-toggle="tab">Full Test Script</a></li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <!-- tab 1 -->
-          <div role="tabpanel" class="tab-pane active" id="demo_output">
-            <div class="row">
+            <div class="row hidden-xs">
               <div class="col-sm-12">
-                <h4 style="padding: 10px;">Press the "Take Off" button</h4>
-                <iframe src="examples/1_fakesite/flythru/" style="border: 4px solid #fff; width: 100%; height: 600px;"></iframe>
-              </div>
-            </div>
-          </div>
-          <!-- tab 2 -->
-          <div role="tabpanel" class="tab-pane" id="demo_js">
-            <div class="row">
-              <div class="col-sm-12">
-                <h4 style="padding: 10px;">Full example</h4>
-                <div style="max-height: 600px;  overflow-x: auto">
-                  <pre class="prettyprint" style="white-space: none;"><code>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-inverse" role="tablist">
+                  <li role="presentation" class="active"><a href="#demo_output" aria-controls="demo_output" role="tab" data-toggle="tab">Demo</a></li>
+                  <li role="presentation"><a href="#demo_js" aria-controls="demo_js" role="tab" data-toggle="tab">Full Test Script</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <!-- tab 1 -->
+                  <div role="tabpanel" class="tab-pane active" id="demo_output">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h4 style="padding: 10px;">Press the "Take Off" button</h4>
+                        <iframe src="examples/1_fakesite/flythru/" style="border: 4px solid #fff; width: 100%; height: 600px;"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- tab 2 -->
+                  <div role="tabpanel" class="tab-pane" id="demo_js">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h4 style="padding: 10px;">Full example</h4>
+                        <div style="max-height: 600px;  overflow-x: auto">
+                          <pre class="prettyprint" style="white-space: none;"><code>
         // configuration (set viewport size, pace)
         // optional
         flythru.config({
@@ -135,19 +133,19 @@
         // set your website page
         // mandatory prior to adding tests!
         flythru.destination("../index.html");
-        
-        // First test aka Flight! 
+
+        // First test aka Flight!
         // each Flight has stops and layovers
         // inside stops and layovers are pass, fail and cargo
         // 'pass' is a function to call to continue to next stop
         // 'fail' throws error and grounds flight
         // 'cargo' is a cached object that shares data between stops,flights, layovers
-        //    and gives you access to your websites window object and the page HTML 
-        //    wrapped in jQuery. You can use 'cargo' to pass data between 
+        //    and gives you access to your websites window object and the page HTML
+        //    wrapped in jQuery. You can use 'cargo' to pass data between
         //    flights, stops or layovers :)
         flythru.addFlight("Login")
         .addStop("Enter Credentials - admin/pass123", function(pass,fail,cargo){
-           if(cargo.html.find('[name="username"]').typeIn("admin").length > 0 
+           if(cargo.html.find('[name="username"]').typeIn("admin").length > 0
                && cargo.html.find('[name="password"]').typeIn("pass123").length > 0){
                pass();
            }else{
@@ -155,9 +153,9 @@
            }
         })
         .addStop("Click login",function(pass,fail,cargo){
-            var found = cargo.html.find('button:contains("Login")') 
+            var found = cargo.html.find('button:contains("Login")')
             if(found.length) { found.click(); pass(); }
-            else { fail("No login button found"); }            
+            else { fail("No login button found"); }
         }).
         layover("Records ready?",function(pass,fail,cargo){
             var found = cargo.html.find('.contacts-table');
@@ -165,7 +163,7 @@
                 pass();
             }
         });
-        
+
         // edit
         flythru.addFlight("Find and Edit Ted")
         .addStop("Search for Ted",function(pass,fail,cargo){
@@ -179,7 +177,7 @@
                 fail("Could not find search box!");
             }
         })
-        .layover("Is Ted there?",function(pass,fail,cargo){            
+        .layover("Is Ted there?",function(pass,fail,cargo){
             var found = cargo.html.find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
             if(found.length){
                 cargo.ele = found; pass();
@@ -195,15 +193,15 @@
               if(match) pass();
             }
         },5000)
-        .layover(2000) // <-- wait so you can read the details, for effect only 
+        .layover(2000) //  wait so you can read the details, for effect only
         .addStop("Close the details", function(pass,fail,cargo){
             var found = cargo.html.find('.detail-pane footer button');
             if(found.length){
-                found.click(); 
+                found.click();
                 (!found.is(":visible"))?pass():fail('Details did not close!');
             }
         });
-        
+
         // logout
         flythru.addFlight("Logout")
         .layover(1000)
@@ -216,318 +214,344 @@
             }
         })
         .layover("Are we at login screen?",function(pass,fail,cargo){
-            var found = cargo.html.find('[name="username"]'); 
+            var found = cargo.html.find('[name="username"]');
             if(found.length && found.is(":visible")) pass();
-        },4000);</code></pre>
+        },4000);
+              </code></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+                <!-- Tab panes end -->
               </div>
-            </div>
-          </div>
+           </div>
+         </div>
+      </article>
+      <!-- /demo -->
+      <hr>
+      <!-- api -->
+      <article class="row">
+            <div class="col-sm-12" style="padding-bottom: 15px;">
+                <h1 id="api">API</h1>
+                <p>Here you will find the references for the latest version of flythru.js.</p>
 
-        </div>
-      </div>
-     </div>       
-    </article>
 
-    <hr>
-    
-    <article class="row">
-      <div class="col-sm-12" style="padding-bottom: 15px;">
-          <h1 id="api">API</h1>
-          <p>Here you will find the references for the latest version of flythru.js.</p>
-     
-     
-          <section class="row">
-           <div class="col-sm-12">
-              <h2>flythru.config</h2>
-              <p>Sets configuration for flythru prior to running any flights or destinations.</p>
-              <code>flythru.config(obj);</code>
-              <h3>Usage and default values</h3>
-           </div>
-           
-            <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>viewport</td>
-                  <td>object</td>
-                  <td>The "h" is an int that sets the height in pixels of the viewport. The "w" is the width in pixels of the viewport.</td>
-                </tr>
-                <tr>
-                  <td>zoom</td>
-                  <td>int/float</td>
-                  <td>Sets the zoom of the viewport using the css attribute scale. Numbers from 0 to 1</td>
-                </tr>
-                <tr>
-                  <td>pace</td>
-                  <td>int</td>
-                  <td>The time between each flight in milliseconds.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>     
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-                
-      flythru.config({
-         viewport: {
-              h: 800, w: 900
-          },
-          zoom: 1,
-          pace: 1000
-      });
-      </pre>
-           <p><mark>returns <b><u>flythru</u></b></mark> for chaining</p>
-          </div>
-          
-        </section>
-        
-        <section class="row">
-           <div class="col-sm-12">
-              <h2>flythru.destination</h2>
-              <p>Sets target url for viewport and flights to be run against.
-                  <br />  
-                <i>Note: At this time all destinations must be same domain where flythru was extracted to, aka your website.</i>
-              </p>
-              
-              
-              <code>flythru.destination(string);</code>
-              <h3>Usage, no default value</h3>
-           </div>
-           
-           <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>target page</td>
-                  <td>string</td>
-                  <td>Required: A resolvable web page running a single page JavaScript application that all flights will be on.</td>
-                </tr>
-               
-              </tbody>
-            </table>
-          </div>   
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-                
-      flythru.destination("../index.html");
-      </pre>
-            <p><mark>returns <b><u>flythru</u></b></mark> for chaining</p>
-          </div>
-      </section>
-      
-      
-      <section class="row">
-           <div class="col-sm-12">
-              <h2>flythru.addFlight</h2>
-              <p>Creates a new flight that contains stops and layovers.
-                  <br />  
-              </p>
-              
-              
-              <code>flythru.addFlight(string);</code>
-              <h3>Usage, no default value</h3>
-           </div>
-           
-           <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>name</td>
-                  <td>string</td>
-                  <td>Required: The flight name, it will display as a flight header grouping the stops and layovers in the flight control panel.</td>
-                </tr>
-               
-              </tbody>
-            </table>
-          </div>   
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-                
-      flythru.addFlight("My First Grouping");
-      </pre>
-            <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
-          </div>
-      </section>
-      
-      <section class="row">
-           <div class="col-sm-12">
-              <h2><i>Flight</i>.addStop</h2>
-              <p>Creates a new stop in a flight where a check can be made to pass to go to the next stop, or fail and ground the flight.
-                  <br />  
-              </p>
-              
-              
-              <code>flythru.addStop(stopName, flightCallback);</code>
-              <h3>Usage, no default value</h3>
-           </div>
-           
-           <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>name</td>
-                  <td>string</td>
-                  <td>Required: The stop name, it will display as the stop below the flight header in order of addition.</td>
-                </tr>
-                <tr>
-                  <td>flightCallback</td>
-                  <td>function</td>
-                  <td>Required: A callback function that controls your logic whether to pass or fail this stop.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>   
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-              
-    /*Flight*/.addStop("My Stop",function(pass,fail,cargo)
-    {
-      // (true)?pass():fail();
+                <section class="row">
+                 <div class="col-sm-12">
+                    <h2>flythru.config</h2>
+                    <p>Sets configuration for flythru prior to running any flights or destinations.</p>
+                    <code>flythru.config(obj);</code>
+                    <h3>Usage and default values</h3>
+                 </div>
+
+                  <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>viewport</td>
+                        <td>object</td>
+                        <td>The "h" is an int that sets the height in pixels of the viewport. The "w" is the width in pixels of the viewport.</td>
+                      </tr>
+                      <tr>
+                        <td>zoom</td>
+                        <td>int/float</td>
+                        <td>Sets the zoom of the viewport using the css attribute scale. Numbers from 0 to 1</td>
+                      </tr>
+                      <tr>
+                        <td>pace</td>
+                        <td>int</td>
+                        <td>The time between each flight in milliseconds.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js"><code>
+    flythru.config({
+       viewport: {
+            h: 800, w: 900
+        },
+        zoom: 1,
+        pace: 1000
     });
-      </pre>
-            <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
-          </div>
-      </section>
-      
-      
-      <section class="row">
-           <div class="col-sm-12">
-              <h2><i>Flight</i>.addLayover <small>overload 1</small></h2>
-              <p>Creates a new layover which halts the flight for a specified time and continues by automatically calling pass after time elapses.<br />  
-              </p>
-              
-              
-              <code>flythru.addLayover(ms);</code>
-              <h3>Usage, no default value</h3>
-           </div>
-           
-           <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>ms</td>
-                  <td>int</td>
-                  <td>Required: Time in milliseconds for flight to be halted, then pass is called.</td>
-                </tr>               
-              </tbody>
-            </table>
-          </div>   
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-              
-    /*Flight*/.addLayover(1000);
-      </pre>
-            <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
-          </div>
-      </section>
-      
-      <section class="row">
-           <div class="col-sm-12">
-              <h2><i>Flight</i>.addLayover <small>overload 2</small></h2>
-              <p>Creates a new stop but is also a layover! This halts the flight and will call the flightCallback every 1 second until pass() or fail() is called. 
-                If neither pass or fail is called prior to the ms time specified, then fail is automatically called and the flight fails and is halted.<br />  
-              </p>
-              
-              
-              <code>flythru.addLayover(layoverName,flightCallback,ms);</code>
-              <h3>Usage, no default value</h3>
-           </div>
-           
-           <div class="col-xs-12 col-sm-6">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>name</td>
-                  <td>string</td>
-                  <td>Required: The stop name, it will display as the stop below the flight header in order of addition.</td>
-                </tr>
-                <tr>
-                  <td>flightCallback</td>
-                  <td>function</td>
-                  <td>Required: A callback function that controls your logic whether to pass or fail this stop.</td>
-                </tr>    
-                 <tr>
-                  <td>ms</td>
-                  <td>int</td>
-                  <td>Required: Time in milliseconds for flight to be halted.</td>
-                </tr>           
-              </tbody>
-            </table>
-          </div>   
-           
-           <div class="col-xs-12 col-sm-6">              
-              <pre class="prettyprint lang-js">
-              
-    /*Flight*/.addLayover(":)", function(pass,fail,cargo)
-    {
-      // (true)?pass():fail();
+          </code></pre>
+                 <p><mark>returns <b><u>flythru</u></b></mark> for chaining</p>
+                </div>
+
+              </section>
+
+              <section class="row">
+                 <div class="col-sm-12">
+                    <h2>flythru.destination</h2>
+                    <p>Sets target url for viewport and flights to be run against.
+                        <br />
+                      <i>Note: At this time all destinations must be same domain where flythru was extracted to, aka your website.</i>
+                    </p>
+
+
+                    <code>flythru.destination(string);</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>target page</td>
+                        <td>string</td>
+                        <td>Required: A resolvable web page running a single page JavaScript application that all flights will be on.</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js"><code>
+  flythru.destination("../index.html");
+          </code></pre>
+                  <p><mark>returns <b><u>flythru</u></b></mark> for chaining</p>
+                </div>
+            </section>
+
+
+            <section class="row">
+                 <div class="col-sm-12">
+                    <h2>flythru.addFlight</h2>
+                    <p>Creates a new flight that contains stops and layovers.
+                        <br />
+                    </p>
+
+
+                    <code>flythru.addFlight(string);</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>name</td>
+                        <td>string</td>
+                        <td>Required: The flight name, it will display as a flight header grouping the stops and layovers in the flight control panel.</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js"><code>
+  flythru.addFlight("My Grouping");
+          </code></pre>
+                  <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
+                </div>
+            </section>
+
+            <section class="row">
+                 <div class="col-sm-12">
+                    <h2><i>Flight</i>.addStop</h2>
+                    <p>Creates a new stop in a flight where a check can be made to pass to go to the next stop, or fail and ground the flight.
+                        <br />
+                    </p>
+
+
+                    <code>flythru.addStop(stopName, flightCallback);</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>name</td>
+                        <td>string</td>
+                        <td>Required: The stop name, it will display as the stop below the flight header in order of addition.</td>
+                      </tr>
+                      <tr>
+                        <td>flightCallback</td>
+                        <td>function</td>
+                        <td>Required: A callback function that controls your logic whether to pass or fail this stop.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js xxs-hidden"><code>
+  /*Flight*/.addStop("My Stop",function(pass,fail,cargo)
+  {
+    // (true)?pass():fail();
+  });
+        </code></pre>
+        <pre class="prettyprint lang-js xxs-visible"><code>
+    /*Flight*/.addStop("My Stop",
+      function(pass,fail,cargo){
+        // (true)?pass():fail();
+    });
+
+</code></pre>
+                  <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
+                </div>
+            </section>
+
+
+            <section class="row">
+                 <div class="col-sm-12">
+                    <h2><i>Flight</i>.addLayover <small>overload 1</small></h2>
+                    <p>Creates a new layover which halts the flight for a specified time and continues by automatically calling pass after time elapses.<br />
+                    </p>
+
+
+                    <code>flythru.addLayover(ms);</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ms</td>
+                        <td>int</td>
+                        <td>Required: Time in milliseconds for flight to be halted, then pass is called.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js"><code>
+  /*Flight*/.addLayover(1000);
+        </code></pre>
+                  <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
+                </div>
+            </section>
+
+            <section class="row">
+                 <div class="col-sm-12">
+                    <h2><i>Flight</i>.addLayover <small>overload 2</small></h2>
+                    <p>Creates a new stop but is also a layover! This halts the flight and will call the flightCallback every 1 second until pass() or fail() is called.
+                      If neither pass or fail is called prior to the ms time specified, then fail is automatically called and the flight fails and is halted.<br />
+                    </p>
+
+
+                    <code>flythru.addLayover(layoverName,flightCallback,ms);</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>name</td>
+                        <td>string</td>
+                        <td>Required: The stop name, it will display as the stop below the flight header in order of addition.</td>
+                      </tr>
+                      <tr>
+                        <td>flightCallback</td>
+                        <td>function</td>
+                        <td>Required: A callback function that controls your logic whether to pass or fail this stop.</td>
+                      </tr>
+                       <tr>
+                        <td>ms</td>
+                        <td>int</td>
+                        <td>Required: Time in milliseconds for flight to be halted.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js xxs-hidden"><code>
+  /*Flight*/.addLayover(":)", function(pass,fail,cargo)
+  {
+    // (true)?pass():fail();
+  },8000);
+        </code></pre>
+          <pre class="prettyprint lang-js xxs-visible"><code>
+    /*Flight*/.addLayover(":)",
+      function(pass,fail,cargo){
+        // (true)?pass():fail();
     },8000);
-      </pre>
-            <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
+    </code></pre>
+                  <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
+                </div>
+            </section>
+
           </div>
-      </section>
-      
-      
-    </article>
-    
-    
-    
+      </article>
+      <!-- /api -->
+      <hr>
+      <footer>
+        <p>&copy; Var Nerd, LLC</p>
+      </footer>
+    </div> <!-- /container -->
 
 
-    <hr>
+<!-- Modal -->
+<div class="modal fade" id="modal_github" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Let's work together!</h4>
+      </div>
+      <div class="modal-body">
+        <p>We are working on making this public!</p>
+        <p>Stick around!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <footer>
-      <p>&copy; Var Nerd, LLC</p>
-    </footer>
-  </div> <!-- /container -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -543,11 +567,11 @@
               scrollTop: $(href).offset().top - 65
             }, 500);
             //document.location.hash = href;
-            return false;  
-          }          
+            return false;
+          }
         });
       });
-      
+
     </script>
   </body>
 </html>
