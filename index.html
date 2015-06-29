@@ -55,40 +55,18 @@
       <div class="row">
         <div class="col-md-4">
           <h2>UI Smart</h2>
-          <p>Easily write pass/fail tests based on the DOM elements in your single page application. Mimic your users interactions in each test step using your favorite javascript libraries and watch them play out live when they run.</p>
+          <p>Easily write pass/fail tests based on the DOM elements in your single page application. Mimic user interactions in each test step using javascript events and watch them play out live when they run.</p>
         </div>
         <div class="col-md-4">
           <h2>Drop-In-Ready</h2>
-          <p>FlyThru JS is a drop in directory containing all the necessary files to start writing tests and witnessing results immediatley.</p>
+          <p>FlyThru JS is a drop in directory containing all the necessary files to start writing tests and witnessing results immediatley. </p>
        </div>
         <div class="col-md-4" >
           <h2>Simple Syntax</h2>
           <p>Functional testing should not be difficult. Create a test, add steps, wait for elements to appear and simply pass or fail them. Easy as that!</p>
         </div>
       </div>
-		  <hr>
-      <!-- getting started -->
-      <article class="row">
-      	<div class="col-sm-6">
-      		<h1 id="getting_started">Getting Started</h1>
-      		<ol>
-      			<li>Download flythru.js kit</li>
-      			<li>Drop the /flythru folder into your root directory of a dev or test environment</li>
-      			<li>Set the destination to load the entry file using flythru.destination(&quot;../your-index.html&quot;)</li>
-      			<li>Browse to /flythru/index.html and the tester will load the page</li>
-      		</ol>
-      	</div>
-      	<div class="col-sm-6">
-      		<h2>Kit Directory Structure</h2>
-      		<pre>
-    /flythru
-      index.html
-      /assets
-        flythru.min.css
-        flythru.min.js</pre>
-      	</div>
-      </article>
-      <!-- /getting started -->
+
       <hr>
       <!-- demo -->
       <article id="demo" class="row">
@@ -230,7 +208,32 @@
          </div>
       </article>
       <!-- /demo -->
+      		  <hr>
+      <!-- getting started -->
+      <article class="row">
+      	<div class="col-sm-6">
+      		<h1 id="getting_started">Getting Started</h1>
+      		<ol>
+      			<li>Download and unzip the flythru.js kit.</li>
+      			<li>Place the /flythru folder into the root directory of your dev or test environment of the website you are going to test.</li>
+      			<li>Set the path to your app's home page in the flythru index.html but using flythru.destination(&quot;../your-index.html&quot;).</li>
+      			<li>Then browse to /flythru/index.html and the Flight Panel will load your application into the viewport.</li>
+            <li>Start writing Flights!</li>
+      		</ol>
+      	</div>
+      	<div class="col-sm-6">
+      		<h2>Kit Directory Structure</h2>
+      		<pre>
+    /flythru
+      index.html
+      /assets
+        flythru.min.css
+        flythru.min.js</pre>
+      	</div>
+      </article>
+      <!-- /getting started -->
       <hr>
+      
       <!-- api -->
       <article class="row">
             <div class="col-sm-12" style="padding-bottom: 15px;">
@@ -420,8 +423,7 @@
       function(pass,fail,cargo){
         // (true)?pass():fail();
     });
-
-</code></pre>
+    </code></pre>
                   <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
                 </div>
             </section>
@@ -522,6 +524,76 @@
                   <p><mark>returns <b><u>flight</u></b></mark> for chaining</p>
                 </div>
             </section>
+
+
+           <section class="row">
+                 <div class="col-sm-12">
+                    <h2><i>FlightCallback(</i><small>pass,fail,cargo</small>)</h2>
+                    <p>This callback controls the progress of the flight and where all your logic should take place.<br />
+                    </p>
+
+
+                    <code>function(pass,fail,cargo){ /* your code */ }</code>
+                    <h3>Usage, no default value</h3>
+                 </div>
+
+                 <div class="col-xs-12 col-md-5">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>pass</td>
+                        <td>function</td>
+                        <td>When called continues the flight path to next stop to layover.</td>
+                      </tr>
+                      <tr>
+                        <td>fail</td>
+                        <td>function</td>
+                        <td>When called it halts the flight and shows red indicator. If a message is passed it will be alerted.</td>
+                      </tr>
+                       <tr>
+                        <td>cargo</td>
+                        <td>object</td>
+                        <td>This is a flythru global object shared between flights, stops and layovers.
+                          By default it is preloaded with the window object of your site and the html element wrapped in jQuery. 
+                          This is here for you.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                 <div class="col-xs-12 col-md-7 xxs-no-pad ">
+                    <pre class="prettyprint lang-js "><code>
+  /*Flight.addStop(":)",*/ 
+  function(pass,fail,cargo)
+  {
+    // (true)?pass():fail();
+  }/*);*/
+        </code></pre>
+                            <pre class="prettyprint lang-js "><code>
+  pass(); 
+        </code></pre>
+         <pre class="prettyprint lang-js"><code>
+  fail(); // optional message
+  fail('Alert this message'); 
+        </code></pre>
+        
+          <pre class="prettyprint lang-js "><code>
+  cargo.win; // window object from target
+  cargo.html; // jQuery wrapped 
+        </code></pre>       
+                
+        
+                </div>
+            </section>
+
 
           </div>
       </article>

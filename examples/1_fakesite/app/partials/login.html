@@ -3,10 +3,10 @@
     <div class="message" style="color: red">{{message}}</div>
     <form autocomplete="off" ng-hide="loading">
       <div>
-        <label>Username:</label><input type="text" name="username" ng-model="username" autocomplete="new-password" />
+        <label>Username:</label><input type="text" name="_username" ng-model="username" autocomplete="new-password" />
       </div>
       <div>
-        <label>Password:</label><input type="password" name="password" ng-model="password" autocomplete="new-password" />
+        <label>Password:</label><input type="password" name="_password" ng-model="password" autocomplete="new-password" />
       </div>
       <div style="text-align: right;">
         <button ng-click="login()" >Login</button>

@@ -7,16 +7,21 @@ body,html {
             height: 35px; background: rgba(0, 0, 0, 0.77);
         }
         #title_bar button { 
-            float: right; cursor: pointer; border: 0; background: none; 
+            float: right; cursor: pointer; border: 0; background-color: transparent; 
             color: #fff;
             border-left: 1px solid rgba(255, 255, 255, 0.44); height: 35px; padding: 1px 10px;
-            margin-right: 5px; outline: none; font-weight: bold;
+             outline: none; font-weight: bold;
             }
+         #run_test { padding-right: 15px !important; }
+         #title_bar button:first-child { display: none; }
          #title_bar button:disabled {
-             opacity: .8;
+             opacity: .8; cursor: default;
+         }
+         #title_bar button.btn-icon:disabled {
+             opacity: .3;
          }
          #title_bar button:hover:not(:disabled) {
-             background: rgba(255, 255, 255, 0.11);
+             background-color: rgba(255, 255, 255, 0.11);
          }
         
         #left_cont {
@@ -98,6 +103,17 @@ body,html {
             background-size: 90%; background-repeat: no-repeat;        	
         }
         
+        .restart {
+        	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAMAAABEQrEuAAAAM1BMVEX////////////////////////////////////////////////////////////////////lEOhHAAAAEHRSTlMAECAwQFBgcICQoLDA0ODwVOCoyAAAAWVJREFUeAHN1duSgyAMxvEvcpCDQt7/adc2to1LU+vFzuzvsjN/BQSKkU9LY2y4LcnjXOGNFJtO+Mh7wB+Kgo2DgSo3AE0X7hZwJbwTOjN7IKpi2cfZA0aJ91FQfxURAHVjPivfTUCpskQh3V8x3wKHEUmS8Ft7G6SVJGnDgKk/AtKTZpYkEwZUJHA96MdIEmBzXU2/MkvyOWAuEJ5FOAt6hlgkyCe7bY3PXIJG+ICyU7kxJluXeeMrRM95R3xhSj0CSQrCqanI+shKVZxKj9F3YwPa+M7/ZeGkcNeLfzWP66trf0FbNnaJLRg70UZs7HZbvXyionVqbU2SbD1O8cdfo3HrKLN6iZXMrE3qijOTqoJVf0Ux3tRyKY9PXHnXhtdEVdDwdyON/j02fqnAkIglBX+TKh9EGImJhk1sM06Eb2wo1Vr7+LYpE6iZRyhWPmpp2j9yhYFCXvZXrWV22CUOuOjR/gC4dyiy7r63FgAAAABJRU5ErkJggg==);
+        }
+        .btn-icon {   
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 40%;
+            width: 35px; 
+        }
+                   
+               
         #speciman { 
             transition: opacity 500ms ease-in-out;
         }

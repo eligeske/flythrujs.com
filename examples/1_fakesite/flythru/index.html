@@ -2,14 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>flythrujs</title>
-    <link href="assets/flythru.css" rel="stylesheet" type="text/css" />
+    <link href="assets/flythru.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div>
         <div id="left_cont">
             <div id="title_bar">
                 <span class="flythrulogo flythruimg"></span>
-                <button id="run_test" disabled>Take Off</button>
+                <button id="run_test" disabled title="Start Flight!">Take Off</button>
+                <button id="reset" class="restart btn-icon" title="Reset" disabled>&nbsp;</button>  
             </div>
             <div id="test_panel"></div>
         </div>
@@ -22,7 +23,7 @@
     </div>
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="assets/flythru.js"></script>
+    <script src="assets/flythru.min.js"></script>
     <script>
         flythru.config({
            viewport:{
@@ -107,7 +108,7 @@
             if(found.length && found.is(":visible")) pass();
         },4000);
         
-        
+    
     </script>
     
 </body>

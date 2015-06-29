@@ -2,6 +2,7 @@ var flythru = (function(){
 	
     var testpanel = $('#test_panel');
     var iframe = $('#speciman');
+    var resetBtn = $('#reset');
     var cw;    
     var tests = [];   
     var loaded = false;
@@ -39,12 +40,52 @@ var flythru = (function(){
        runSettings(); 
     });
     var startBtn = $('#run_test').click(function(){
-        start();        
+        timeline.start();        
     });
     startBtn.attr('disabled',true);
     setTimeout(function(){
         startBtn.removeAttr('disabled',true);        
     },1);
+    resetBtn.click(function(){
+        timeline.reset();
+    });
+    var timeline = (function(){
+        var i = 0;
+        var out = {
+            start: function(){
+                resetBtn.attr('disabled',true);                
+                var nextTest = function(){
+                    if(tests[i]){
+                        if(tests[i-1]){
+                            tests[i-1].expand(false);
+                        }
+                        tests[i].expand(true);
+                        tests[i].arrival(function(){
+                            i++;
+                            nextTest(i);
+                        });
+                        tests[i].takeoff();    
+                    }else{
+                        out.stop();
+                        startBtn.text("Landed!");
+                    }               
+                };
+                nextTest(); 
+            },
+            stop: function(){
+                resetBtn.removeAttr('disabled');
+            },
+            reset: function(){
+                i = 0;
+                for(var ii=0; ii < tests.length; ii++){
+                    tests[ii].reset();
+                }
+                startBtn.text("Take Off").removeAttr('disabled');
+            }
+        }
+        return out;
+    })();
+    
     var start = function(){
         var i = 0;
         var nextTest = function(){
@@ -103,7 +144,13 @@ var flythru = (function(){
             var waits = {};
             
             var completedCallbacks = [];
-                       
+                   
+            this.reset = function(){
+                on = 0;
+                group.removeClass("passed").removeClass("failed");
+                rowcont.find('div').removeClass("passed").removeClass("failed");
+                self.expand(false);
+            }    
             
             var group = $("<div>", { "class":"group" });
             var title = $("<span>", { "class": "title", html: name });
