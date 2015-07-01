@@ -1,5 +1,221 @@
-var flythru = (function(){	
+var flythru = (function(){
+    
+    var flightPanel = $('#test_panel');
+    var iframe = $('#speciman');
+    var resetBtn = $('#reset');
+    var frameCont = $('#browser_window');
+    var rightCol = $('#right_cont');
+    
+    var hangar;
+    var config;
+    
+    var __construct = function(){
+        config = {
+            viewport: {
+                h: 800, w: 900
+            },
+            zoom: 1,
+            pace: 1000
+        }
+        uiSetup();
+        hangar = new Hangar();
+        hangar.addPlane("First Plane");
+    }
+    
+    /* SETUP */
+    var uiSetup = function(){
+        iframe.css({
+            "height":config.viewport.h+"px",
+            "width":config.viewport.w+"px",
+            "transform": "scale("+config.zoom+")"
+        });
+        if(config.zoom < 1){
+           iframe.css({
+            "transform": "scale("+config.zoom+")"
+            }); 
+        }
+        var width = ((rightCol.width() - (iframe.width()*config.zoom)) / 2);
+        var height = ((rightCol.height() - (iframe.height()*config.zoom)) / 2);
+        frameCont.css({
+            'padding-left': (width > 0)?width:0,
+            'padding-top': (height > 0)?height:0,  
+        });
+    }
+    
+    /* PUBLIC */
+    
+    var out = {
+        getConfig: function(){
+            return config;
+        },
+        plane: function(name){
+            var p = hangar.getPlaneByName(name);
+            return (p)?p:hangar.addPlane(name).lastPlane()
+        },
+        addFlight: function(name){
+            return hangar.lastPlane().addFlight(name).lastFlight();
+		}
+    }
+    
+    /* CLASSES */
+    
+    // Hangar
+    var Hangar = function(){        
+        var self = this;
+        var planes = [];
+        this.getPlaneByName = function(name){
+            return getObjectByName(planes,name);
+        }
+        this.addPlane = function(name){
+            var plane = new Plane(name,self);
+            planes.push(plane);
+            return self;
+        }
+        this.lastPlane = function(){
+            if(!planes.length){ throw "No planes have been added"; return; }  
+            return planes[planes.length - 1];
+        }
+    }
+    // Plane
+    var planeStates = {
+        inFlight: 1,
+        halted: 2        
+    }
+    var Plane = function(name, hangar){
+        var self = this;
+        var name = name;
+        var hangar = hangar;
+        var itinerary = [];
+        var state = planeStates.halted;
+        self.cargo = {};
+        
+        // flight
+        this.addFlight = function(name){
+            var flt = new Flight(name, self);
+            itinerary.push(flt);
+            return flt;
+        }
+        
+    }
+    // Destination
+    var Destination = function(location){
+        var self = this;
+        var location = location;
+        
+        var flight = new Flight("Fly to "+location);
+        
+        return flight;
+    }
+    // Flight
+    var Flight = function(name, plane){
+        var self = this;
+        var name = name;
+        var plane = plane;        
+        var stops = [];
+        var flightLog = {
+            currentStop: 0
+        }
+        var flightCompleteCallbacks = [];
+        
+        // ui
+        var group = $("<div>", { "class":"group" });
+        var title = $("<span>", { "class": "title", html: name });
+        var rowcont = $("<div>", { "class": "check-holder" });
+        group.append(title,rowcont);
+        flightPanel.append(group);
+        
+        
+        
+        /* flight controls */
+        // starts flight in beginning and each next stop/layover
+        var takeOff = function(){
+            
+        }
+        
+        /* flight patterns */
+        // stop
+        this.addStop = function(name,pilotsLogicFunction){
+            
+        }
+        // layover 1
+        // layover 2
+        // destination
+        
+        /* stop/layover callbacks */
+        var pass = function(){
+            
+        }
+        
+        
+        /* notifiers */
+        this.onflightComplete = function(callback){
+            flightCompleteCallbacks.push(callback);
+        }
+    }
 	
+    var FlightStop = function(name,pilotsLogicFunction,rowCont){
+        var self = this;
+        var name = name;
+        var pilotsLogicFunction = pilotsLogicFunction;
+        var rowCont = rowCont;
+        var css = { passed: "passed", faild: "failed" };
+        
+        var passed = false;
+        var stopComplete = false;
+        var stopCompleteCallbacks = [];
+        
+        // ui
+        var row = $("<div>", { html: "<span>" + name + "</span>", "class": "check" });
+        rowCont.append(row);
+                
+        // public
+        this.inspection = function(){
+            pilotsLogicFunction(
+                function(){
+                   row.addClass(css.passed);
+                   passed = true;
+                   stopComplete = true; 
+                },
+                function(reason){
+                    row.addClass(css.failed);
+                    stopComplete = true;
+                    if(reason){
+                        alert(reason);
+                    }
+                });
+             if(stopComplete){
+                 runCallbackList(stopCompleteCallbacks,passed);
+             }else{
+                 throw "No callback was called for: "+name;
+             }
+        };
+        
+        // when completed fire callbacks and tell them if it passed
+        this.stopCompleteCallback = function(callback){
+            stopCompleteCallbacks.push(callback);
+        }
+    }
+    
+    
+    
+    /* helpers */
+    var getObjectByName = function(list,name){
+         var m = false;
+        $.each(list,function(key,obj){
+            if(key == name){ m = obj; return; }
+        });
+        return m;
+    }
+    var runCallbackList = function(list,arg){
+        $.each(list,function(key,callback){
+            callback(arg);
+        });
+    }
+    
+    __construct();
+    /* END */
+    
+    
     var testpanel = $('#test_panel');
     var iframe = $('#speciman');
     var resetBtn = $('#reset');

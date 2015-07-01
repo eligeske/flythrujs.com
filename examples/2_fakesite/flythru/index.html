@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>flythrujs</title>
-    <link href="assets/flythru.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/flythru.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div>
         <div id="left_cont">
             <div id="title_bar">
                 <span class="flythrulogo flythruimg"></span>
-                <button id="run_test" disabled title="Start Flight!">Take Off</button>
+                <button id="run_test"  title="Start Flight!">Take Off</button>
                 <button id="reset" class="restart btn-icon" title="Reset" disabled>&nbsp;</button>  
             </div>
             <div id="test_panel"></div>
@@ -38,20 +38,20 @@
         // login
         flythru.addFlight("Login")
         .addStop("Enter Credentials - admin/pass123", function(pass,fail,cargo){
-           if(cargo.html.find('[name="username"]').typeIn("admin").length > 0 
-               && cargo.html.find('[name="password"]').typeIn("pass123").length > 0){
+           if($(cargo.win.document).find('[name="username"]').typeIn("admin").length > 0 
+               && $(cargo.win.document).find('[name="password"]').typeIn("pass123").length > 0){
                pass();
            }else{
                fail('Unable to fill in credentials');
            }
         })
         .addStop("Click login",function(pass,fail,cargo){
-            var found = cargo.html.find('button:contains("Login")') 
-            if(found.length) { found.click(); pass(); }
+            var found = $(cargo.win.document).find('button:contains("Login")') 
+            if(found.length) { found.trigger('click'); pass(); }
             else { fail("No login button found"); }            
         }).
         layover("Records ready?",function(pass,fail,cargo){
-            var found = cargo.html.find('.contacts-table');
+            var found = $(cargo.win.document).find('.contacts-table');
             if(found.length && found.is(":visible")){
                 pass();
             }
@@ -63,7 +63,7 @@
             cargo.passenger = {
                 fname: "Ted", lname: "Schmity"
             }
-            var found = cargo.html.find("[ng-model='searchParam']");
+            var found = $(cargo.win.document).find("[ng-model='searchParam']");
             if(found.length){
                 found.typeIn(cargo.passenger.fname); pass();
             }else{
@@ -71,7 +71,7 @@
             }
         })
         .layover("Is Ted there?",function(pass,fail,cargo){            
-            var found = cargo.html.find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
+            var found = $(cargo.win.document).find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
             if(found.length){
                 cargo.ele = found; pass();
             }
@@ -80,7 +80,7 @@
             cargo.ele.click(); pass();
         })
         .layover("Wait for Ted's details", function(pass,fail,cargo){
-            var foundLabel = cargo.html.find('.detail-pane label:contains("Name:")');
+            var foundLabel = $(cargo.win.document).find('.detail-pane label:contains("Name:")');
             if(foundLabel.length){
                 var match = foundLabel.parent().text().indexOf(cargo.passenger.fname+" "+cargo.passenger.lname) > 0;
                if(match) pass();
@@ -88,7 +88,7 @@
         },5000)
         .layover(2000) // <-- wait so you can read the details, for effect only 
         .addStop("Close the details", function(pass,fail,cargo){
-            var found = cargo.html.find('.detail-pane footer button');
+            var found = $(cargo.win.document).find('.detail-pane footer button');
             if(found.length){
                 found.click(); 
                 (!found.is(":visible"))?pass():fail('Details did not close!');
@@ -99,7 +99,7 @@
         flythru.addFlight("Logout")
         .layover(1000)
         .addStop("Click the logout button",function(pass,fail,cargo){
-            var found = cargo.html.find("[ng-click='logout()']");
+            var found = $(cargo.win.document).find("[ng-click='logout()']");
             if(found.length){
                 found.click(); pass();
             }else{
@@ -107,7 +107,7 @@
             }
         })
         .layover("Are we at login screen?",function(pass,fail,cargo){
-            var found = cargo.html.find('[name="username"]'); 
+            var found = $(cargo.win.document).find('[name="username"]'); 
             if(found.length && found.is(":visible")) pass();
         },4000);
         
