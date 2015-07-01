@@ -7,7 +7,6 @@ var flythru = (function(){
     var tests = [];   
     var loaded = false;
     var cargo = { win: null };
-    var targetJQuery;
     
     var stopped = false;
     
@@ -82,13 +81,7 @@ var flythru = (function(){
             },
             reset: function(){
                 out.stop();
-                i = 0;
-                for(var ii=0; ii < tests.length; ii++){
-                    tests[ii].reset();
-                }                
-                cargo.html.remove();
-                iframe.addClass('faded');                
-                
+                cargo.win.location.reload();
             }
         }
         return out;
@@ -97,20 +90,18 @@ var flythru = (function(){
     var setWindow = function(){
         
         cargo.win = (iframe[0].contentWindow)?iframe[0].contentWindow:false;
-        if(cargo.win && cargo.win.$){
-            targetJQuery = iframe[0].contentWindow.$;
-            cargo.html = iframe[0].contentWindow.$('html');
-        }else if(cargo.win && cargo.win.document){
-            targetJQuery = $;
-            cargo.html = $(cargo.win.document).find('html');
-        }else{
-            cargo.html = false;
-        }      
+        cargo['toolbox'] : {
+            angular: {
+                applyValue: (){
+                    
+                }
+            }
+        }
         // bind type in  
-        if(targetJQuery){
+        /* if(targetJQuery){
             //flythru.cargo.win.angular.element(flythru.cargo.html.find('button:contains("Login")')[0]).scope().$apply
             // jquery extensions 
-            var applyAngular = function(ele){
+           var applyAngular = function(ele){
                 var attr = ele.attr('ng-model');
                 if(attr && cargo.win.angular && cargo.win.angular.element(ele).scope){
                     cargo.win.angular.element(ele).scope()[attr] = ele.val();
@@ -122,7 +113,7 @@ var flythru = (function(){
                 applyAngular(targetJQuery(this));
                 return this;
             }
-        }
+        }*/
     }
 	var Test = function (name) {
             
