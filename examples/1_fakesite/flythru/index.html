@@ -10,7 +10,7 @@
             <div id="title_bar">
                 <span class="flythrulogo flythruimg"></span>
                 <button id="run_test" disabled title="Start Flight!">Take Off</button>
-                <button id="reset" class="restart btn-icon" title="Reset" disabled>&nbsp;</button>  
+                <button id="reset" class="restart btn-icon" title="Reset" disabled>&nbsp;</button>
             </div>
             <div id="test_panel"></div>
         </div>
@@ -23,7 +23,7 @@
     </div>
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="assets/flythru.js"></script>
+    <script src="assets/flythru.min.js"></script>
     <!-- PLACE YOUR CODE BELOW -->
     <!-- Hint: Start with flythru.config, followed by flythru.destination -->
     <!-- then put your flights into separate js files in order below -->
@@ -34,25 +34,24 @@
            }
         });
         flythru.destination("../index.html");
-        
+
         // login
         flythru.addFlight("Login")
         .addStop("Enter Credentials - admin/pass123", function(pass,fail,cargo){
            var uInput = $(cargo.win.document).find('[name="username"]');
            var pInput = $(cargo.win.document).find('[name="password"]');
-           if(uInput.val("admin").length > 0 
-               && pInput.val("pass123").length > 0){
-                   cargo.win.angular.element(uInput[0]).scope().$apply();
-                   cargo.win.angular.element(pInput[0]).scope().$apply();
+           if(uInput.length > 0 && pInput.length > 0){
+                   cargo.toolbox.angular.applyValue(uInput[0],"admin");
+                   cargo.toolbox.angular.applyValue(pInput[0],"pass123");
                    pass();
            }else{
                fail('Unable to fill in credentials');
            }
         })
         .addStop("Click login",function(pass,fail,cargo){
-            var found = $(cargo.win.document).find('button:contains("Login")'); 
+            var found = $(cargo.win.document).find('button:contains("Login")');
             if(found.length) { found.click(); pass(); }
-            else { fail("No login button found"); }            
+            else { fail("No login button found"); }
         }).
         layover("Records ready?",function(pass,fail,cargo){
             var found = $(cargo.win.document).find('.contacts-table');
@@ -60,7 +59,7 @@
                 pass();
             }
         });
-        
+
         // edit
         flythru.addFlight("Find and Edit Ted")
         .addStop("Search for Ted",function(pass,fail,cargo){
@@ -69,13 +68,16 @@
             }
             var found = $(cargo.win.document).find("[ng-model='searchParam']");
             if(found.length){
-                found.typeIn(cargo.passenger.fname); pass();
+                cargo.toolbox.angular.applyValue(found[0],
+                                                  cargo.passenger.fname);
+                pass();
             }else{
                 fail("Could not find search box!");
             }
         })
-        .layover("Is Ted there?",function(pass,fail,cargo){            
-            var found = $(cargo.win.document).find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
+        .layover("Is Ted there?",function(pass,fail,cargo){
+            var found = $(cargo.win.document)
+                        .find('.contacts-table td:contains("'+cargo.passenger.fname+'")');
             if(found.length){
                 cargo.ele = found; pass();
             }
@@ -86,19 +88,23 @@
         .layover("Wait for Ted's details", function(pass,fail,cargo){
             var foundLabel = $(cargo.win.document).find('.detail-pane label:contains("Name:")');
             if(foundLabel.length){
-                var match = foundLabel.parent().text().indexOf(cargo.passenger.fname+" "+cargo.passenger.lname) > 0;
+                var match = foundLabel
+                      .parent()
+                      .text()
+                      .indexOf(cargo.passenger.fname+" "+cargo.passenger.lname) > 0;
                if(match) pass();
             }
         },5000)
-        .layover(2000) // <-- wait so you can read the details, for effect only 
+        .layover(2000) // <-- wait so you can read the details, for effect only
         .addStop("Close the details", function(pass,fail,cargo){
-            var found = $(cargo.win.document).find('.detail-pane footer button');
+            var found = $(cargo.win.document)
+                          .find('.detail-pane footer button');
             if(found.length){
-                found.click(); 
+                found.click();
                 (!found.is(":visible"))?pass():fail('Details did not close!');
             }
         });
-        
+
         // logout
         flythru.addFlight("Logout")
         .layover(1000)
@@ -111,12 +117,12 @@
             }
         })
         .layover("Are we at login screen?",function(pass,fail,cargo){
-            var found = $(cargo.win.document).find('[name="username"]'); 
+            var found = $(cargo.win.document).find('[name="username"]');
             if(found.length && found.is(":visible")) pass();
         },4000);
-        
-    
+
+
     </script>
-    
+
 </body>
 </html>
